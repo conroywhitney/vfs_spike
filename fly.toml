@@ -1,0 +1,20 @@
+# fly.toml - Fly.io configuration
+app = "vfs-spike"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PHX_HOST = "vfs-spike.fly.dev"
+  VFS_SYNC_DIR = "/app/vfs"
+  RELEASE_DISTRIBUTION = "name"
+  RELEASE_NODE = "vfs-spike"
+
+[processes]
+  app = "/app/bin/vfs_spike start"
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1

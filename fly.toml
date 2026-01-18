@@ -6,10 +6,8 @@ primary_region = "iad"
   dockerfile = "Dockerfile"
 
 [env]
-  PHX_HOST = "vfs-spike.fly.dev"
   VFS_SYNC_DIR = "/app/vfs"
-  RELEASE_DISTRIBUTION = "name"
-  RELEASE_NODE = "vfs-spike"
+  # RELEASE_NODE and RELEASE_DISTRIBUTION set by rel/env.sh.eex at runtime
 
 [processes]
   app = "/app/bin/vfs_spike start"

@@ -27,3 +27,4 @@ vfs_spike-*.tar
 
 # VFS directories (created at runtime)
 /vfs/
+*.conf

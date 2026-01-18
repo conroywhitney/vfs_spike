@@ -244,6 +244,66 @@ defmodule VfsSpike.Conflict do
 end
 ```
 
+### 8. Selective Sync
+
+`.vfsignore` file to exclude patterns (like `.gitignore`).
+
+```
+# .vfsignore
+*.log
+node_modules/
+.git/
+*.tmp
+```
+
+### 9. Web Dashboard
+
+LiveView UI showing:
+- Connected nodes and their status
+- Recent sync activity
+- File conflicts
+- Bandwidth usage
+
+### 10. Mobile Sync
+
+iOS/Android app that connects as a BEAM node. Photos sync instantly to your server.
+
+### 11. End-to-End Encryption
+
+Encrypt files before sync, decrypt on read. Only endpoints have keys.
+
+```elixir
+defmodule VfsSpike.Crypto do
+  def encrypt(content, key), do: :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, content, aad, true)
+  def decrypt(ciphertext, key), do: :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, ciphertext, aad, false)
+end
+```
+
+### 12. Version History
+
+Git-like history for every file. Rollback, diff, branch.
+
+```elixir
+VfsSpike.history("file.txt")
+# => [{:v3, "2026-01-18T00:00:00Z", "abc123"}, {:v2, ...}, {:v1, ...}]
+
+VfsSpike.rollback("file.txt", :v2)
+VfsSpike.diff("file.txt", :v2, :v3)
+```
+
+### 13. Permissions & Access Control
+
+Role-based access: read-only nodes, write nodes, admin nodes.
+
+```elixir
+# Node capabilities
+%{
+  "backup-server" => [:read],
+  "workstation" => [:read, :write],
+  "admin" => [:read, :write, :delete, :admin]
+}
+```
+
 ## Tested With
 
 - 10MB random binary files - ~1 second sync
